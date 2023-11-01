@@ -2,6 +2,9 @@ package com.hongdroid.hellospring.service;
 
 import com.hongdroid.hellospring.domain.Member;
 import com.hongdroid.hellospring.repository.MemberRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +13,8 @@ import java.util.Optional;
  * 회원 서비스
  * 서비스 클래스에서는 비즈니스 처리를 하는 부분이 많기에 네이밍 자체도 비즈니스 용어들을 섞으면 좋다.
  */
+
+@Transactional
 public class MemberService { // TIPS. test case code를 작성하고 싶을 때 클래스 명에 커서 두고 ctrl + shift + t 를 누르면 초기 테스트코드 템플릿을 생성해준다
     private final MemberRepository memberRepository;
 
@@ -22,9 +27,7 @@ public class MemberService { // TIPS. test case code를 작성하고 싶을 때 
      * 회원 가입
      */
     public Long join(Member member) {
-
         // TIP. cmd + option + v 하면 리턴형 앞에 자동으로 붙일 수 있음..ㅋ
-
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
         return member.getId();

@@ -1,7 +1,17 @@
 package com.hongdroid.hellospring.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 시스템에 저장하는 아이디
+
     private String name;
 
     public Long getId() {
